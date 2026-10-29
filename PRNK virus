@@ -1,0 +1,17 @@
+' Harmless Notepad Opener Prank (VBScript)
+' Opens 100 Notepad windows. Completely safe - no damage, no persistence, no network.
+
+Set WshShell = CreateObject("WScript.Shell")
+
+' Fun starting message
+MsgBox "Initializing payload..." & vbCrLf & vbCrLf & "X = open many payloads" & vbCrLf & vbCrLf & "Opening 100 Notepads...", vbInformation, "System Update"
+
+' Open 100 Notepad windows
+For i = 1 To 100
+    WshShell.Run "notepad.exe", 1, False
+    ' Tiny delay so it doesn't choke the system
+    WScript.Sleep 50
+Next
+
+' Final prank message
+MsgBox "You've been pranked!" & vbCrLf & vbCrLf & "100 Notepads have been opened." & vbCrLf & "Just close them all and you're good :)", vbExclamation, "Prank Complete!"
