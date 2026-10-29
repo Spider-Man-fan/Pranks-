@@ -1,0 +1,54 @@
+' Malware.Inject Prank VBS Script
+' Harmless prank - just message boxes and some fun effects
+' Save as malware_inject_prank.vbs and double-click to run
+
+Option Explicit
+
+Dim WshShell, fso, notepadPath
+Set WshShell = CreateObject("WScript.Shell")
+Set fso = CreateObject("Scripting.FileSystemObject")
+
+' Fake malware activation
+MsgBox "WARNING: malware.inject payload detected!" & vbCrLf & vbCrLf & "Initiating infection sequence...", vbCritical + vbSystemModal, "SYSTEM CRITICAL"
+
+WScript.Sleep 1000
+
+' Fake progress
+MsgBox "Scanning system for vulnerabilities..." & vbCrLf & "Progress: 23%", vbExclamation, "malware.inject"
+WScript.Sleep 800
+MsgBox "Progress: 67%" & vbCrLf & "Encrypting files... (just kidding)", vbExclamation, "malware.inject"
+WScript.Sleep 800
+MsgBox "Progress: 99%" & vbCrLf & "Almost done injecting malware.inject...", vbExclamation, "malware.inject"
+
+WScript.Sleep 1500
+
+' The prank reveal
+MsgBox "GOTCHA!" & vbCrLf & vbCrLf & "This was a prank! No files were harmed." & vbCrLf & "malware.inject is not real (or is it? 😉)", vbInformation + vbSystemModal, "Prank Successful"
+
+' Optional: Open notepad with a funny message
+Dim tempFile
+tempFile = fso.GetSpecialFolder(2) & "\prank_message.txt"  ' Temp folder
+Dim file
+Set file = fso.CreateTextFile(tempFile, True)
+file.WriteLine "========================================"
+file.WriteLine "     MALWARE.INJECT PRANK ACTIVATED"
+file.WriteLine "========================================"
+file.WriteLine ""
+file.WriteLine "You fell for it!"
+file.WriteLine "No actual malware was injected."
+file.WriteLine "Have a nice day! 😄"
+file.WriteLine ""
+file.WriteLine "P.S. Don't run random .vbs files from the internet!"
+file.Close
+
+WshShell.Run "notepad.exe """ & tempFile & """", 1, False
+
+' Cleanup after a bit (optional, notepad will keep it open)
+WScript.Sleep 2000
+
+MsgBox "Prank complete. File opened in Notepad for your amusement.", vbOKOnly, "Done"
+
+' Clean up objects
+Set file = Nothing
+Set fso = Nothing
+Set WshShell = Nothing
