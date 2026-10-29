@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+"""
+Password-Protected Terminal App
+Requires password every time: Ad(0e
+"""
+
+import getpass
+import os
+import sys
+import subprocess
+
+CORRECT_PASSWORD = "Ad(0e"
+
+def main():
+    print("=== Secure Terminal ===")
+    print("Authentication required to access the terminal.")
+    
+    try:
+        entered = getpass.getpass("Enter password: ")
+    except KeyboardInterrupt:
+        print("\nCancelled.")
+        sys.exit(1)
+    
+    if entered != CORRECT_PASSWORD:
+        print("Access denied. Incorrect password.")
+        sys.exit(1)
+    
+    print("Access granted. Starting terminal...\n")
+    
+    # Drop into a shell
+    shell = os.environ.get("SHELL", "/bin/bash")
+    try:
+        subprocess.call([shell])
+    except Exception as e:
+        print(f"Error starting shell: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
